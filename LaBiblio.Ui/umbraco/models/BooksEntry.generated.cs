@@ -58,7 +58,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual string Author => this.Value<string>(_publishedValueFallback, "author");
 
 		///<summary>
-		/// BookDescription
+		/// Book Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

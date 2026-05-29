@@ -10,5 +10,9 @@ namespace Catalog.Infrastructure.Messaging
         public DaprBookPublisher (DaprClient dapr) => _dapr = dapr;
 
 
+        public Task PublishBookCreatedAsync(Guid bookId, string title, string author)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

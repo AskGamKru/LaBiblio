@@ -26,7 +26,6 @@ namespace Catalog.Api.Subscribers
             Console.WriteLine(msg.Title);
 
             var book = new Book(
-                msg.BookId,
                 msg.Title,
                 msg.Author
                 );
