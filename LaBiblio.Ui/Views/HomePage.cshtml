@@ -1,0 +1,17 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HomePage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inject Umbraco.Cms.Web.Common.UmbracoHelper umbracoHelper
+@{
+    Layout = "master.cshtml";
+}
+
+
+<div class="jumbotron d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-1 mb-4">
+            @Model.HighlightText
+        </h1>
+
+    </div>
+</div>
