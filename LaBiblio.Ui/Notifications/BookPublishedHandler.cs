@@ -17,6 +17,9 @@ namespace LaBiblio.Ui.Notifications
         {
             foreach (var content in notification.PublishedEntities)
             {
+                // Logging
+                Console.WriteLine($"[BookPublishedHandler] alias='{content.ContentType.Alias}', name='{content.Name}'");
+                
                 if (content.ContentType.Alias != "booksEntry")
                     continue;
 

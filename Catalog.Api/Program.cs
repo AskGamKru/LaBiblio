@@ -61,13 +61,13 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-app.UseHttpsRedirection();
-
 app.UseCloudEvents();               // Til model-binding, så DTO virker.
 
 app.UseRouting();                   
 
 app.MapSubscribeHandler();          // Registrering af [Topic] subscriptions hos Dapr.
+
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
