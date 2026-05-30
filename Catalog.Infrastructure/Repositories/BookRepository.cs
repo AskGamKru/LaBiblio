@@ -5,6 +5,7 @@ using System.Text;
 using Catalog.Domain.Entities;
 
 using Catalog.UseCases.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Repositories
 {
@@ -16,6 +17,10 @@ namespace Catalog.Infrastructure.Repositories
         {
             _db = db;
         }
+        public async Task<Book?> GetByIdAsync(Guid id)
+        {
+            return await _db.Books.FirstOrDefaultAsync(b => b.Id == id);
+        }
         public async Task AddAsync(Book book)
         {
             await _db.Books.AddAsync(book);
@@ -24,6 +29,5 @@ namespace Catalog.Infrastructure.Repositories
         {
             await _db.SaveChangesAsync();
         }
-
     }
 }

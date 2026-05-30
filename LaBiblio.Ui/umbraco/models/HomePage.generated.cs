@@ -50,35 +50,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Company Address
+		/// Hightlight Text
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("companyAddress")]
-		public virtual string CompanyAddress => this.Value<string>(_publishedValueFallback, "companyAddress");
-
-		///<summary>
-		/// Company Name
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("companyName")]
-		public virtual string CompanyName => this.Value<string>(_publishedValueFallback, "companyName");
-
-		///<summary>
-		/// Company Phone
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("companyPhone")]
-		public virtual string CompanyPhone => this.Value<string>(_publishedValueFallback, "companyPhone");
-
-		///<summary>
-		/// Highlight Text
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("highlightText")]
-		public virtual string HighlightText => this.Value<string>(_publishedValueFallback, "highlightText");
+		[ImplementPropertyType("hightlightText")]
+		public virtual string HightlightText => this.Value<string>(_publishedValueFallback, "hightlightText");
 	}
 }

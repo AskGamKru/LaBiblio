@@ -9,6 +9,12 @@ namespace Catalog.Infrastructure.Messaging
 
         public DaprBookPublisher (DaprClient dapr) => _dapr = dapr;
 
-
+        public async Task PublishBookCreatedAsync(Guid id, string title, string author)
+        {
+            await _dapr.PublishEventAsync("labiblio-pubsub", "book-created", new
+            {
+                Id = id, Title = title, Author = author
+            });
+        }
     }
 }
