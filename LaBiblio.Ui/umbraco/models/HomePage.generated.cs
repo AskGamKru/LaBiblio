@@ -50,11 +50,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Hightlight Text
+		/// Highlight Text
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.0+3aa87fe")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("hightlightText")]
-		public virtual string HightlightText => this.Value<string>(_publishedValueFallback, "hightlightText");
+		[ImplementPropertyType("highlightText")]
+		public virtual string HighlightText => this.Value<string>(_publishedValueFallback, "highlightText");
 	}
 }

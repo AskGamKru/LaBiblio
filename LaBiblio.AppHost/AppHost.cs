@@ -32,7 +32,9 @@ var catalog = builder.AddProject<Projects.Catalog_Api>("catalog-api")
     {
         AppId = "catalog",                              // Identitet Dapr bruger til service discovery og pub/sub.
         DaprHttpPort = 5002,
-        ResourcesPaths = daprResources                  // Sti til Dapr-komponenter/configuration.
+        ResourcesPaths = daprResources,                  // Sti til Dapr-komponenter/configuration.
+        AppHealthCheckPath = "/health",
+        AppHealthThreshold = 3
     });
 
 builder.Build().Run();
