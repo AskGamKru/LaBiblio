@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Dapr;
 using Catalog.UseCases.Repositories;
 using Catalog.Infrastructure.Repositories;
+using Catalog.Infrastructure.Messaging;
 using Catalog.Facade.Interfaces;
 using Catalog.UseCases.Commands;
+using Catalog.UseCases.Ports;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +16,14 @@ builder.AddServiceDefaults();       // Gør det muligt at kalde service, via nav
 
 // DbContext
 builder.Services.AddDbContext<CatalogDbContext>(options =>
-    options.UseNpgsql(
-        builder.Configuration.GetConnectionString("catalogDb")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("catalogDb")));
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ICreateBookUseCase, CreateBookUseCase>();
+builder.Services.AddScoped<IPublishBookUseCase,  PublishBookUseCase>();
+builder.Services.AddScoped<IBookPublisher, DaprBookPublisher>();
+builder.Services.AddDaprClient();
+
 
 builder.Services.AddControllers()   // Gør det muligt at bruge [ApiController] og [Route].
     .AddDapr();
@@ -63,17 +68,17 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCloudEvents();               // Til model-binding, så DTO virker.
 
-app.UseRouting();                   
-
-app.MapSubscribeHandler();          // Registrering af [Topic] subscriptions hos Dapr.
-
-app.UseHttpsRedirection();
+app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapControllers();               // Mapper alle controllers med [ApiController].
+
+app.MapSubscribeHandler();          // Registrering af [Topic] subscriptions hos Dapr.
+
+//app.UseHttpsRedirection();
+
 // CORS
 app.UseCors("AllowAll");            // Aktiver CORS-middleware
-
-app.MapControllers();               // Mapper alle controllers med [ApiController].
 
 app.Run();

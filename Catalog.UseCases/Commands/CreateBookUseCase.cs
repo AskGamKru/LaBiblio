@@ -16,6 +16,7 @@ namespace Catalog.UseCases.Commands
 
             await _repo.AddAsync(book);
             await _repo.SaveAsync();
+
         }
     }
 }

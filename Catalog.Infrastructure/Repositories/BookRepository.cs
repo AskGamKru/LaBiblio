@@ -1,9 +1,5 @@
 ﻿using Catalog.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Catalog.Domain.Entities;
-
 using Catalog.UseCases.Repositories;
 using Microsoft.EntityFrameworkCore;
 

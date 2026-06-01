@@ -4,6 +4,10 @@
   <Project Path="Catalog.Facade/Catalog.Facade.csproj" Id="45dd09bd-d912-4662-a6c1-d4ed8a31dafd" />
   <Project Path="Catalog.Infrastructure/Catalog.Infrastructure.csproj" Id="78cb0aad-615b-475c-bc6d-24839af16c5d" />
   <Project Path="Catalog.UseCases/Catalog.UseCases.csproj" Id="eb9d7a98-d5e4-4452-93d2-e01dfde498a6" />
+  <Project Path="Inventory.Api/Inventory.Api.csproj" />
+  <Project Path="Inventory.Domain/Inventory.Domain.csproj" Id="6f85d414-e68f-49c6-83cb-6c7216ce69a7" />
+  <Project Path="Inventory.Infrastructure/Inventory.Infrastructure.csproj" Id="1ba3a67e-bbe7-4b86-a5c8-9bac59e3eec3" />
+  <Project Path="Inventory.UseCases/Inventory.UseCases.csproj" Id="ff90803e-3892-4c73-829e-8a0abcfd0bbd" />
   <Project Path="LaBiblio.AppHost/LaBiblio.AppHost.csproj" />
   <Project Path="LaBiblio.ServiceDefaults/LaBiblio.ServiceDefaults.csproj" />
   <Project Path="LaBiblio.Ui/LaBiblio.Ui.csproj" Id="adb5e214-23da-4980-a321-91f30a4c5c18" />

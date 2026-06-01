@@ -10,9 +10,7 @@ namespace Catalog.Infrastructure.Persistence
     {
         public DbSet<Book> Books => Set<Book>();
 
-        public CatalogDbContext(DbContextOptions<CatalogDbContext> options): base(options)
-        {
-        }
+        public CatalogDbContext(DbContextOptions<CatalogDbContext> options): base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

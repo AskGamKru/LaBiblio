@@ -12,15 +12,16 @@ var postgres = builder.AddPostgres("postgres")          // Oprettelse af en Post
     .WithLifetime(ContainerLifetime.Persistent)         // Behold data mellem runs.
     .WithPgAdmin();                                     // Giver adgang til UI over databasen.
 
-var catalogDb = postgres.AddDatabase("catalogDb");      // Opretter DB i ovennævnte container.
+var catalogDb = postgres.AddDatabase("catalogDb");
+var inventoryDb = postgres.AddDatabase("inventoryDb");
 
 // Umbraco
 builder.AddProject<Projects.LaBiblio_Ui>("laBiblio-ui")
-    .WithDaprSidecar(new DaprSidecarOptions             // Aktiverer en Dapr sidecar til servicen.
+    .WithDaprSidecar(new DaprSidecarOptions
     {
         AppId = "ui",                                   // Identitet Dapr bruger til service discovery og pub/sub.
         DaprHttpPort = 5001,
-        ResourcesPaths = daprResources                  // Sti til Dapr-komponenter/configuration.
+        ResourcesPaths = daprResources
     });
 
 
@@ -28,13 +29,24 @@ builder.AddProject<Projects.LaBiblio_Ui>("laBiblio-ui")
 var catalog = builder.AddProject<Projects.Catalog_Api>("catalog-api")
     .WithReference(catalogDb)                           // Giver adgang til databasen.
     .WaitFor(catalogDb)                                 // Projektet starter først efter adgang til db er sikret = ingen race conditions.
-    .WithDaprSidecar(new DaprSidecarOptions             // Aktiverer en Dapr sidecar til servicen.
+    .WithDaprSidecar(new DaprSidecarOptions
     {
         AppId = "catalog",                              // Identitet Dapr bruger til service discovery og pub/sub.
         DaprHttpPort = 5002,
-        ResourcesPaths = daprResources,                  // Sti til Dapr-komponenter/configuration.
+        ResourcesPaths = daprResources,
         AppHealthCheckPath = "/health",
         AppHealthThreshold = 3
+    });
+
+// Inventory
+var inventory = builder.AddProject<Projects.Inventory_Api>("inventory-api")
+    .WithReference(inventoryDb)
+    .WaitFor(inventoryDb)
+    .WithDaprSidecar(new DaprSidecarOptions
+    {
+        AppId = "inventory",
+        DaprHttpPort = 5003,
+        ResourcesPaths = daprResources
     });
 
 builder.Build().Run();
