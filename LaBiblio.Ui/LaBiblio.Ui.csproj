@@ -27,7 +27,6 @@
 
     <Content Include="Views\Books.cshtml" />
     <Content Include="Views\BooksEntry.cshtml" />
-    <Content Include="Views\HomePage.cshtml" />
   </ItemGroup>
 
 </Project>
