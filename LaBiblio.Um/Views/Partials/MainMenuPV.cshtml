@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Services.Navigation
+
+@inject IDocumentNavigationQueryService DocumentNavigationQueryService
+@inject IPublishedContentStatusFilteringService PublishedStatusFilteringService
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{ var selection = Model.Root(DocumentNavigationQueryService, PublishedStatusFilteringService).Children(DocumentNavigationQueryService, PublishedStatusFilteringService).Where(x => x.IsVisible(PublishedValueFallback)).ToArray(); }
+
+@if (selection.Length > 0)
+{
+    <ul>
+        @foreach (var item in selection)
+        {
+            <li class="@(item.IsAncestorOrSelf(Model) ? "nav-current" : null)">
+                <a href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+            </li>
+        }
+    </ul>
+}

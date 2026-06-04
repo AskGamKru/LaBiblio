@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var homePage = Model.Root();
+}
+
+<a href="@homePage.Url()">
+    @Model.Value("companyName", fallback: Fallback.ToAncestors)
+</a>

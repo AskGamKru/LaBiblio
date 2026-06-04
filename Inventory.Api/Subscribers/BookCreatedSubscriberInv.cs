@@ -40,11 +40,6 @@ namespace Inventory.Api.Subscribers
 
             return Ok();
         }
-        [HttpGet("/debug/routes")]
-        public IActionResult Debug()
-        {
-            return Ok("alive");
-        }
         public record BookCreatedMessage(Guid BookId, string Title, string Author);
     }    
 }

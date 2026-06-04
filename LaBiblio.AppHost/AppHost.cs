@@ -10,16 +10,16 @@ var daprResources = ImmutableHashSet.Create("../dapr");
 // DB
 var postgres = builder.AddPostgres("postgres")          // Oprettelse af en PostgreSQL-container i Docker.
     .WithLifetime(ContainerLifetime.Persistent)         // Behold data mellem runs.
-    .WithPgAdmin();                                     // Giver adgang til UI over databasen.
+    .WithPgAdmin();                                      // Giver adgang til UI over databasen.
 
 var catalogDb = postgres.AddDatabase("catalogDb");
 var inventoryDb = postgres.AddDatabase("inventoryDb");
 
 // Umbraco
-builder.AddProject<Projects.LaBiblio_Ui>("laBiblio-ui")
+builder.AddProject<Projects.LaBiblio_Um>("laBiblio-um")
     .WithDaprSidecar(new DaprSidecarOptions
     {
-        AppId = "ui",                                   // Identitet Dapr bruger til service discovery og pub/sub.
+        AppId = "um",                                   // Identitet Dapr bruger til service discovery og pub/sub.
         DaprHttpPort = 5001,
         ResourcesPaths = daprResources
     });
@@ -48,5 +48,7 @@ var inventory = builder.AddProject<Projects.Inventory_Api>("inventory-api")
         DaprHttpPort = 5003,
         ResourcesPaths = daprResources
     });
+
+builder.AddProject<Projects.Loan_Api>("loan-api");
 
 builder.Build().Run();

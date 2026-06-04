@@ -11,4 +11,10 @@
   <Project Path="LaBiblio.AppHost/LaBiblio.AppHost.csproj" />
   <Project Path="LaBiblio.ServiceDefaults/LaBiblio.ServiceDefaults.csproj" />
   <Project Path="LaBiblio.Ui/LaBiblio.Ui.csproj" Id="adb5e214-23da-4980-a321-91f30a4c5c18" />
+  <Project Path="LaBiblio.Um/LaBiblio.Um.csproj" Id="eaa523bd-06bc-4b11-989c-ba4924c5bb97" />
+  <Project Path="Loan.Api/Loan.Api.csproj" />
+  <Project Path="Loan.Domain/Loan.Domain.csproj" Id="54a9f940-ba6a-4428-9c88-4947ff4edb6b" />
+  <Project Path="Loan.Facade/Loan.Facade.csproj" Id="4c4310e8-e180-453d-9d6f-0a0d72fd5c44" />
+  <Project Path="Loan.Infrastructure/Loan.Infrastructure.csproj" Id="848c28a4-6c3c-4397-b246-9a8dba2e52a5" />
+  <Project Path="Loan.UseCases/Loan.UseCases.csproj" Id="d69a1004-b781-41db-afb5-da228c9e11a3" />
 </Solution>

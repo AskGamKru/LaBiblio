@@ -1,84 +1,31 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Books>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TextPage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-    Layout = "master.cshtml";
-
-    // Henter bøgerne – hvis listen er tom, laves en tom liste i stedet for at crashe
-    var books = Model.Children<BooksEntry>()?.OrderByDescending(x => x.CreateDate) ?? Enumerable.Empty<BooksEntry>();
+	Layout = "master.cshtml";
 }
 <div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center">
   <div class="container text-center">
-    <h1 class="display-2 mb-4">@Model.Name</h1>
+    <h1 class="display-2 mb-4">Text page</h1>
   </div>
 </div>
-<section id="blog" class="bg-grey">
+<section id="single-content" class="bg-white">
     <div class="container">
-        <div class="section-content">
-            <div class="title-wrap mb-5 aos-init aos-animate">
-                <h2 class="section-title">Books</h2>
-            </div>
+        <div class="section-content blog-content">
             <div class="row">
-                
-                <div class="col-md-12 blog-holder">
-                    <div class="row">
-                        @foreach (var item in books)
-                        {
-                            // 1. MEGET VIGTIGT: Hvis en bog i databasen er korrupt/tom, springer vi den over
-                            if (item == null) continue; 
-
-                            // 2. SIKKER FORFATTER-TJEK (Ingen Null-pointer her!)
-                            string author = !string.IsNullOrEmpty(item.Value<string>("author")) ? item.Value<string>("author") : "Anonymous";
-                            
-                            // 3. SIKKER BILLEDE-TJEK
-                            string imageUrl = item.Image != null ? item.Image.Url() : "https://via.placeholder.com/400x500?text=Ingen+Forside";
-                            
-                            // 4. SIKKER KATEGORI-TJEK
-                            string categories = item.Category != null ? String.Join(" | ", item.Category) : "Uden kategori";
-                            
-                            <div class="col-md-4 blog-item-wrapper">
-                                <div class="blog-item">
-                                    <div class="blog-img">
-                                        <a href="@item.Url()">
-                                            <img src="@imageUrl" alt="@item.Name">
-                                        </a>
-                                    </div>
-                                    <div class="blog-text">
-                                        <div class="blog-tag">
-                                            <h6><small>@categories</small></h6>
-                                        </div>
-                                        <div class="blog-title">
-                                            <a href="@item.Url()"><h4>@item.Name</h4></a>
-                                        </div>
-                                        <div class="blog-meta">
-                                            <p class="blog-date">@item.CreateDate.ToString("MMMM dd, yyyy")</p>
-                                        </div>
-                                        <div class="blog-desc">
-                                            <p>@item.Summary</p>
-                                        </div>
-                                        <div class="blog-author">
-                                            <p>by @author</p>
-                                        </div>
-                                        <div class="blog-share-wrapper">
-                                            <a class="blog-share" href="https://www.facebook.com/">
-                                                <i class="fab fa-facebook-square"></i>
-                                            </a>
-                                            <a class="blog-share" href="https://www.twitter.com/">
-                                                <i class="fab fa-twitter-square"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            }
-                    </div>
+                <div class="col-md-8 offset-md-2 mt-4">
+                   Ipsum text
                 </div>
-                
+                <div class="col-md-2 mt-4 align-self-start">
+                    <ul class="side-nav">
+			<a href=""><li>Sample</li></a>
+			<a href=""><li>Sample</li></a>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
 <section class="bg-fixed overlay">
     <div class="container">
         <div class="section-content">

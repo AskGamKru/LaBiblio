@@ -20,6 +20,8 @@
     <ProjectReference Include="..\Catalog.Api\Catalog.Api.csproj" />
     <ProjectReference Include="..\Inventory.Api\Inventory.Api.csproj" />
     <ProjectReference Include="..\LaBiblio.Ui\LaBiblio.Ui.csproj" />
+    <ProjectReference Include="..\LaBiblio.Um\LaBiblio.Um.csproj" />
+    <ProjectReference Include="..\Loan.Api\Loan.Api.csproj" />
   </ItemGroup>
 
 </Project>

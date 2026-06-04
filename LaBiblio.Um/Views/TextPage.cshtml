@@ -1,0 +1,24 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.TextPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+
+<section id="single-content" class="bg-white">
+    <div class="container">
+        <div class="section-content blog-content">
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2 mt-4">
+                    @Model.BodyText
+            </div>
+
+                <div class="col-md-2 mt-4 align-self-start">
+                    Our Staff:
+                    @await Html.PartialAsync("SideMenuChildren", Model)
+                </div>
+
+        </div>
+    </div>
+</section>

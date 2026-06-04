@@ -1,0 +1,10 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var homePage = Model.Root();
+}
+
+<div class="footer-content">
+    <p class="mx-auto text-center mb-0">
+        @Model.Value("companyName", fallback: Fallback.ToAncestors) | @Model.Value("companyAddress", fallback: Fallback.ToAncestors) | @Model.Value("companyPhone", fallback: Fallback.ToAncestors)</p>
+</div>

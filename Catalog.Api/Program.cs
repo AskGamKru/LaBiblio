@@ -20,7 +20,7 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ICreateBookUseCase, CreateBookUseCase>();
-builder.Services.AddScoped<IPublishBookUseCase,  PublishBookUseCase>();
+builder.Services.AddScoped<IPublishBookUseCase, PublishBookUseCase>();
 builder.Services.AddScoped<IBookPublisher, DaprBookPublisher>();
 builder.Services.AddDaprClient();
 

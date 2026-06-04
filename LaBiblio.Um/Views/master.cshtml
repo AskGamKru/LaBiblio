@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<!DOCTYPE html>
+<html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <title>@Model.Name</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    
+    <div class="top-bar">
+        <header>
+            @await Html.PartialAsync("HeaderPV", Model)
+        </header>
+
+        <nav>
+            @await Html.PartialAsync("MainMenuPV", Model)
+        </nav>
+    </div>
+
+@await Html.PartialAsync("Headline", Model)
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row justify-content-center">
+                @await Html.PartialAsync("Footer", Model)
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

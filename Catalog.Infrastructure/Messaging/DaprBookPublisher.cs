@@ -13,9 +13,6 @@ namespace Catalog.Infrastructure.Messaging
         {
             Console.WriteLine($"PUBLISHING: {id} {title}");
 
-            Console.WriteLine($"DAPR_HTTP_ENDPOINT={Environment.GetEnvironmentVariable("DAPR_HTTP_ENDPOINT")}");
-            Console.WriteLine($"DAPR_GRPC_ENDPOINT={Environment.GetEnvironmentVariable("DAPR_GRPC_ENDPOINT")}");
-
             await _dapr.PublishEventAsync("labiblio-pubsub", "book-created", new
             {
                 BookId = id, Title = title, Author = author
