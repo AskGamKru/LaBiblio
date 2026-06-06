@@ -54,6 +54,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Kør migrations automatisk
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<LoanDbContext>();
+
+    db.Database.Migrate();
+}
+
 app.UseAuthorization();
 
 app.UseCloudEvents();

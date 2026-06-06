@@ -40,6 +40,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Kør migrations automatisk
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<InventoryDbContext>();
+
+    db.Database.Migrate();
+}
+
 app.UseCloudEvents();               // Til model-binding, så DTO virker.
 
 app.UseRouting();
@@ -51,11 +59,6 @@ app.MapControllers();
 app.MapSubscribeHandler();          // Registrering af [Topic] subscriptions hos Dapr.
 
 var endpointSource = app.Services.GetRequiredService<EndpointDataSource>();
-
-foreach (var endpoint in endpointSource.Endpoints)
-{
-    Console.WriteLine($"ENDPOINT: {endpoint.DisplayName}");
-}
 
 //app.UseHttpsRedirection();
 

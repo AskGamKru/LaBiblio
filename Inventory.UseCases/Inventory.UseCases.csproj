@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Inventory.Domain\Inventory.Domain.csproj" />
     <ProjectReference Include="..\Inventory.Facade\Inventory.Facade.csproj" />
+    <ProjectReference Include="..\LaBiblio.ServiceDefaults\LaBiblio.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

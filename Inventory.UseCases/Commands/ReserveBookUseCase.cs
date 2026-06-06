@@ -1,6 +1,8 @@
-﻿using Inventory.Facade.Dtos;
+﻿using Inventory.Domain.Exceptions;
+using Inventory.Facade.Dtos;
 using Inventory.Facade.Interfaces;
 using Inventory.UseCases.Repositories;
+using LaBiblio.ServiceDefaults;
 
 namespace Inventory.UseCases.Commands
 {
@@ -8,17 +10,31 @@ namespace Inventory.UseCases.Commands
     {
         private readonly IBookInventoryRepository _repo;
 
-        public ReserveBookUseCase (IBookInventoryRepository repo)
+        public ReserveBookUseCase(IBookInventoryRepository repo)
         {
             _repo = repo;
         }
-        public async Task Execute(ReserveBookRequestDto request)
+        public async Task<Result> Execute(ReserveBookRequestDto request)
         {
-            var inventory = await _repo.GetByBookIdAsync(request.BookId) ?? throw new InvalidOperationException("Book does not exist.");
-            
-            inventory.Reserve();
-            
-            await _repo.SaveAsync();
+            var inventory = await _repo.GetByBookIdAsync(request.BookId);
+
+            if (inventory == null)
+            {
+                return Result.Failure("No inventory for this book.");
+            }
+
+            try
+            {
+                inventory.Reserve();
+                
+                await _repo.SaveAsync();
+               
+                return Result.Success();
+            }
+            catch (DomainException ex)
+            {
+                return Result.Failure(ex.Message);
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Loan.Infrastructure.Persistence
             var options = new DbContextOptionsBuilder<LoanDbContext>();
 
             options.UseNpgsql(
-                "Host=localhost;Port=50565;Username=postgres;Password=S(_+A_jG4cV7uav+KB)m{3;Database=loanDb");
+                "Host=localhost;Port=51372;Username=postgres;Password=S(_+A_jG4cV7uav+KB)m{3;Database=loanDb");
 
             return new LoanDbContext(options.Options);
         }

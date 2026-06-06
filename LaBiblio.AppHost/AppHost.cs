@@ -1,6 +1,7 @@
-using CommunityToolkit.Aspire.Hosting.Dapr;
-using System.Collections.Immutable;
 using Aspire.Hosting;
+using CommunityToolkit.Aspire.Hosting.Dapr;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Immutable;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -10,7 +11,9 @@ var daprResources = ImmutableHashSet.Create("../dapr");
 // DB
 var postgres = builder.AddPostgres("postgres")          // Oprettelse af en PostgreSQL-container i Docker.
     .WithLifetime(ContainerLifetime.Persistent)         // Behold data mellem runs.
-    .WithPgAdmin();                                     // Giver adgang til UI over databasen.
+    .WithPgAdmin()                                      // Giver adgang til UI over databasen.
+    .WithEnvironment("PGADMIN_CONFIG_LOG_LEVEL", "40")
+    .WithEnvironment("PGADMIN_CONFIG_CONSOLE_LOG_LEVEL", "40");
 
 var catalogDb = postgres.AddDatabase("catalogDb");
 var inventoryDb = postgres.AddDatabase("inventoryDb");
