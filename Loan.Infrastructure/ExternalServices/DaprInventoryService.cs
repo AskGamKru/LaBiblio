@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Loan.UseCases.Ports;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 
 namespace Loan.Infrastructure.ExternalServices
@@ -9,7 +10,10 @@ namespace Loan.Infrastructure.ExternalServices
     {
         private readonly HttpClient _http;
 
-        public DaprInventoryService([FromKeyedServices("inventory")] HttpClient http) => _http = http;
+        public DaprInventoryService([FromKeyedServices("inventory")] HttpClient http)
+        {
+            _http = http;
+        }
 
         public async Task<bool> ReserveBookAsync(Guid loanId, Guid bookId)
         {

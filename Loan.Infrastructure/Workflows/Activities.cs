@@ -32,16 +32,26 @@ public class ConfirmLoanActivity(ILoanRepository repo) : WorkflowActivity<BookLo
     }
 }
 
-public class CancelLoanActivity(ILoanRepository repo, ILoanEventPublisher pub) : WorkflowActivity<CancelInput, object?>
+public class CancelLoanActivity(ILoanRepository repo) : WorkflowActivity<CancelInput, object?>
 {
     public override async Task<object?> RunAsync(WorkflowActivityContext context, CancelInput input)
     {
         var loan = await repo.GetByIdAsync(input.LoanId);
+
         if (loan is not null)
         {
             loan.Cancel(input.reason);
             await repo.SaveAsync();
-            return null;
         }
+            return null;
     }
 }   
+
+public class PublishLoanConfirmedActivity(ILoanEventPublisher pub) : WorkflowActivity<BookLoanInput, Object?>
+{
+    public override async Task<object?> RunAsync(WorkflowActivityContext context, BookLoanInput input)
+    {
+        await pub.PublishLoanConfirmedAsync(input.LoanId, input.BookId, input.UserId);
+        return null;
+    }
+}

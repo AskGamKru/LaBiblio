@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory.Domain.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,6 +28,24 @@ namespace Inventory.Domain.Entities
             TotalQuantity = totalQuantity;
             AvailableQuantity = totalQuantity;
             ReservedQuantity = 0;
+        }
+        public void Reserve()
+        {
+            if (AvailableQuantity <= 0)
+            {
+                throw new DomainException("No copies available.");
+            }
+            AvailableQuantity--;
+            ReservedQuantity++;
+        }
+        public void Release()
+        {
+            if (AvailableQuantity <= 0)
+            {
+                throw new DomainException("No reserved copies to release.");
+            }
+            AvailableQuantity++;
+            ReservedQuantity--;
         }
     }
 }

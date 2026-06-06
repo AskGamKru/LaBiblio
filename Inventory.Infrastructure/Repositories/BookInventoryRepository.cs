@@ -1,6 +1,7 @@
 ﻿using Inventory.Infrastructure.Persistence;
 using Inventory.UseCases.Repositories;
 using Inventory.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 namespace Inventory.Infrastructure.Repositories
 {
     public class BookInventoryRepository : IBookInventoryRepository
@@ -17,6 +18,10 @@ namespace Inventory.Infrastructure.Repositories
         public async Task SaveAsync()
         {
             await _db.SaveChangesAsync();
+        }
+        public async Task<BookInventory?> GetByBookIdAsync(Guid bookId)
+        {
+            return await _db.BookInventories.SingleOrDefaultAsync(b => b.BookId == bookId);
         }
     }
 }

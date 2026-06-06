@@ -11,10 +11,10 @@ namespace Loan.Domain.Entities
         public Guid UserId { get; private set; }
 
         public LoanStatus Status { get; private set; }
-
-        public DateTime LoanedAt { get; private set; }
-        public DateTime? DueDate { get; private set; }
-
+        public DateTime CreatedAt { get; private set; }
+        public DateTime? ConfirmedAt { get; private set; }
+        public DateTime? CancelledAt { get; private set; }
+        public string? CancellationReason { get; private set; }
         private BookLoan() { }
 
         public BookLoan(Guid bookId, Guid userId)
@@ -23,17 +23,28 @@ namespace Loan.Domain.Entities
             BookId = bookId;
             UserId = userId;
             Status = LoanStatus.Created;
-            LoanedAt = DateTime.UtcNow;
+            CreatedAt = DateTime.UtcNow;
         }
 
         public void Confirm()
         {
-            Status = LoanStatus.Active;
+            if (Status != LoanStatus.Created)
+            {
+                throw new DomainException("Only created loans can be confirmed.");
+            }
+            Status = LoanStatus.Confirmed; 
+            ConfirmedAt = DateTime.UtcNow;
         }
 
-        public void Reject()
+        public void Cancel(string reason)
         {
+            if (Status == LoanStatus.Cancelled)
+            {
+                throw new DomainException("Already cancelled.");
+            }
             Status = LoanStatus.Cancelled;
+            CancelledAt = DateTime.UtcNow;
+            CancellationReason = reason;
         }
     }
 }

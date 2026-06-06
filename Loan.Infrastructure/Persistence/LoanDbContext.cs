@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Loan.Domain.Entities;
+﻿using Loan.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Loan.Infrastructure.Persistence
 {
@@ -11,8 +12,13 @@ namespace Loan.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BookLoan>()
-                .HasKey(x => x.Id);
+            modelBuilder.Entity<BookLoan>(e =>
+            {
+                e.HasKey(x => x.Id);
+
+                e.Property(x => x.Status)
+                    .HasConversion<string>();
+            });
         }
     }
 }

@@ -5,5 +5,6 @@ namespace Inventory.UseCases.Repositories
     {
         Task AddAsync(BookInventory book);
         Task SaveAsync();
+        Task<BookInventory?> GetByBookIdAsync(Guid bookId);
     }
 }

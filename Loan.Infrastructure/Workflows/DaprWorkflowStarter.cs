@@ -13,7 +13,8 @@ namespace Loan.Infrastructure.Workflows
         }
         public async Task StartBookLoanWorkflowAsync(Guid loanId, Guid bookId, Guid userId)
         {
-            var input = new BookLoanInput
+            var input = new BookLoanInput(loanId , bookId, userId);
+            await _client.ScheduleNewWorkflowAsync(nameof(BookLoanWorkflow), loanId.ToString(), input);
         }
     }
 }

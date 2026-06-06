@@ -11,7 +11,7 @@ namespace Loan.Infrastructure.Workflows
             {
                 // Trin 1: Reservér bog
                 bookReserved = await context.CallActivityAsync<bool>(nameof(ReserveBookActivity), input);
-                if (!bookReserved)
+                if (!bookReserved) // Equivalent to (bookReserved == false)
                 {
                     await context.CallActivityAsync(nameof(ReleaseBookActivity),
                         new CancelInput(input.LoanId, "Book is not available"));
@@ -20,10 +20,17 @@ namespace Loan.Infrastructure.Workflows
 
                 // Trin 2: Bekræftelse
                 await context.CallActivityAsync(nameof(ConfirmLoanActivity), input);
+                await context.CallActivityAsync(nameof(PublishLoanConfirmedActivity), input);
+                return new BookLoanResult(true, "Loan Confirmed");
             }
             catch (Exception ex)
             {
-
+                if (bookReserved) // Equivalent to (bookReserved == true)
+                {
+                    await context.CallActivityAsync(nameof(ReleaseBookActivity), input);
+                }
+                    await context.CallActivityAsync(nameof(CancelLoanActivity), new CancelInput(input.LoanId, $"Error: {ex.Message}"));
+                    return new BookLoanResult(false, ex.Message);
             }
         }
     }

@@ -6,6 +6,7 @@
   <Project Path="Catalog.UseCases/Catalog.UseCases.csproj" Id="eb9d7a98-d5e4-4452-93d2-e01dfde498a6" />
   <Project Path="Inventory.Api/Inventory.Api.csproj" />
   <Project Path="Inventory.Domain/Inventory.Domain.csproj" Id="6f85d414-e68f-49c6-83cb-6c7216ce69a7" />
+  <Project Path="Inventory.Facade/Inventory.Facade.csproj" />
   <Project Path="Inventory.Infrastructure/Inventory.Infrastructure.csproj" Id="1ba3a67e-bbe7-4b86-a5c8-9bac59e3eec3" />
   <Project Path="Inventory.UseCases/Inventory.UseCases.csproj" Id="ff90803e-3892-4c73-829e-8a0abcfd0bbd" />
   <Project Path="LaBiblio.AppHost/LaBiblio.AppHost.csproj" />
