@@ -5,6 +5,8 @@ using Inventory.Infrastructure.Repositories;
 using Inventory.UseCases.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing;
+using Inventory.Facade.Interfaces;
+using Inventory.UseCases.Commands;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,12 +19,15 @@ builder.Services.AddDbContext<InventoryDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("inventoryDb")));
 
 builder.Services.AddScoped<IBookInventoryRepository, BookInventoryRepository>();
+builder.Services.AddScoped<IReserveBookUseCase, ReserveBookUseCase>();
+builder.Services.AddScoped<IReleaseBookUseCase, ReleaseBookUseCase>();
+builder.Services.AddDaprClient();
+
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(BookCreatedSubscriberInv).Assembly)
     .AddDapr();
 
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();

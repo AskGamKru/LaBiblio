@@ -26,7 +26,7 @@ namespace Inventory.Api.Subscribers
                 msg.BookId,
                 msg.Title,
                 msg.Author,
-                0
+                1
                 );
 
             //Logging
