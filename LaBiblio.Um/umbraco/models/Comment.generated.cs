@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>BookNews</summary>
-	[PublishedModel("bookNews")]
-	public partial class BookNews : PublishedContentModel
+	/// <summary>Comment</summary>
+	[PublishedModel("comment")]
+	public partial class Comment : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
-		public new const string ModelTypeAlias = "bookNews";
+		public new const string ModelTypeAlias = "comment";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
@@ -34,14 +34,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(contentTypeCache, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedContentTypeCache contentTypeCache, Expression<Func<BookNews, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedContentTypeCache contentTypeCache, Expression<Func<Comment, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(contentTypeCache), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public BookNews(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public Comment(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,42 +50,35 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Author
+		/// Email
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("author")]
-		public virtual string Author => this.Value<string>(_publishedValueFallback, "author");
+		[ImplementPropertyType("email")]
+		public virtual string Email => this.Value<string>(_publishedValueFallback, "email");
 
 		///<summary>
-		/// BodyText
+		/// Message
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("bodyText")]
-		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString BodyText => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "bodyText");
+		[ImplementPropertyType("message")]
+		public virtual string Message => this.Value<string>(_publishedValueFallback, "message");
 
 		///<summary>
-		/// Date
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
-		[ImplementPropertyType("date")]
-		public virtual global::System.DateTime Date => this.Value<global::System.DateTime>(_publishedValueFallback, "date");
-
-		///<summary>
-		/// Status
+		/// Subject
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("status")]
-		public virtual string Status => this.Value<string>(_publishedValueFallback, "status");
+		[ImplementPropertyType("subject")]
+		public virtual string Subject => this.Value<string>(_publishedValueFallback, "subject");
 
 		///<summary>
-		/// Title
+		/// Username
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "17.4.2+b87d519")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("title")]
-		public virtual string Title => this.Value<string>(_publishedValueFallback, "title");
+		[ImplementPropertyType("username")]
+		public virtual string Username => this.Value<string>(_publishedValueFallback, "username");
 	}
 }

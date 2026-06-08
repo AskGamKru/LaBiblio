@@ -21,8 +21,12 @@ namespace Inventory.Api.Controllers
         [HttpPost("reserve")]
         public async Task<IActionResult> Reserve(ReserveBookRequestDto request)
         {
-            await _reserve.Execute(request);
-            return Ok();
+            var result = await _reserve.Execute(request);
+            if (result.IsFailure)
+            {
+                return Ok(false);
+            }
+            return Ok(true);
         }
         
         [HttpPost("release")]

@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("b2d9e4c1-242b-4e18-b989-5fb01743b0d1"))
+					.ChildrenOfType("bookNews")
+					.Where(x => x.IsVisible())
+					.OrderByDescending(x => x.CreateDate)
+					.Take(1);
+
+	var latestNews = selection.FirstOrDefault();
+}
+
+<div class="headline">
+    <h1>Breaking News</h1>
+</div>
+
+@if (latestNews != null)
+{
+    <section id="single-content" class="bg-white">
+        <div class="container">
+            <div class="section-content blog-content">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 mt-4">
+                        @latestNews.Name <p><small>Oprettet: @latestNews.CreateDate.ToString("dd/MM/yyyy")</small></p>
+                        <hr />
+                        @latestNews.Value("bodyText")
+                    </div>
+                </div>
+            </div>
+        </section>
+}
+else
+{
+	<p>Ingen nyheder fundet.</p>
+}

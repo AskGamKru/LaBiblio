@@ -1,0 +1,9 @@
+﻿@using LaBiblio.Um.ViewModels
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactUs>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+	await Html.RenderPartialAsync("~/Views/Partials/ContactForm.cshtml", new ContactFormViewModel());
+
+}

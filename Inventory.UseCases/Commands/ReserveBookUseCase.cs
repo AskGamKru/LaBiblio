@@ -33,6 +33,7 @@ namespace Inventory.UseCases.Commands
             }
             catch (DomainException ex)
             {
+                Console.WriteLine("FEJL!");
                 return Result.Failure(ex.Message);
             }
         }

@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.UserComments>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("29a4d6aa-54e6-4d60-99f2-279136c9d94f"))
+    .ChildrenOfType("comment")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.CreateDate);
+}
+
+<ul style="display: flex; flex-direction: column; align-items: center; list-style: none; padding: 0;">
+    @foreach (var item in selection)
+    {
+        <li style="margin: 10px; text-align: center;">
+            <p>@item.Name, From: @item.Value("username")</p>
+            <p>- @item.Value("Message")</p>
+        </li>
+    }
+</ul>
+

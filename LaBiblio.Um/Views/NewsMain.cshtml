@@ -1,0 +1,90 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.NewsMain>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+	
+    var allNews = Model.Children<BookNews>();
+
+    var statuses = allNews
+        .Select(x => x.Status)
+        .Where(x => !string.IsNullOrWhiteSpace(x))
+        .Distinct()
+        .OrderBy(x => x)
+        .ToList();
+
+    var selectedStatus = Context.Request.Query["status"].ToString();
+
+    var news = allNews;
+
+    if (!string.IsNullOrWhiteSpace(selectedStatus))
+    {
+        news = news.Where(x => x.Status == selectedStatus);
+    }
+
+    news = news.OrderByDescending(x => x.CreateDate);
+}
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            <p>Number of Articles: @news.Count()</p>
+            
+            <select class="form-control w-auto d-inline-block text-center" onchange="window.location=this.value">
+
+                <option value="@Model.Url()">All Categories</option>
+
+                @foreach (var status in statuses)
+                {
+                    <option value="?status=@Uri.EscapeDataString(status)"
+                            selected="@(status == selectedStatus)">
+                        @status
+                    </option>
+                }
+
+            </select>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(selectedStatus))
+{
+    <div class="text-center mb-3">
+        <!-- Tilføj text-center her -->
+        <p class="d-inline-block">Showing: <strong>@selectedStatus</strong> Articles.</p>
+        <a href="@Model.Url()" class="d-inline-block">Show All</a>
+    </div>
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+
+        @foreach (var item in news)
+        {
+            <div class="col-md-8 mb-4">
+                <a href="@item.Url()" class="text-decoration-none text-reset">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+
+                            <h4>@item.Title</h4>
+
+                            <p>
+                                <strong>Forfatter:</strong> @item.Author
+                            </p>
+
+                            <p>
+                                <strong>Dato:</strong> @item.Date
+                            </p>
+
+                            <span class="badge bg-secondary">
+                                @item.Status
+                            </span>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
